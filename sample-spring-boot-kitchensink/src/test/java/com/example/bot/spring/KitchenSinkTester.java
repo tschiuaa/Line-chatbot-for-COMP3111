@@ -47,6 +47,7 @@ import com.example.bot.spring.DatabaseEngine;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { KitchenSinkTester.class, DatabaseEngine.class })
+
 public class KitchenSinkTester {
 	@Autowired
 	private DatabaseEngine databaseEngine;
@@ -63,7 +64,7 @@ public class KitchenSinkTester {
 	}
 	
 	@Test
-	public void testFound() throws Exception {
+	public void testFound1() throws Exception {
 		boolean thrown = false;
 		String result = null;
 		try {
@@ -73,5 +74,53 @@ public class KitchenSinkTester {
 		}
 		assertThat(!thrown).isEqualTo(true);
 		assertThat(result).isEqualTo("def");
+	}
+	@Test
+	public void testFound2() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.databaseEngine.search("Hi");
+		} catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("Hey, how things going?");
+	}
+	@Test
+	public void testFound3() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.databaseEngine.search("I am fine");
+		} catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("Great!");
+	}
+	@Test
+	public void testFound4() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.databaseEngine.search("Who is Prof Kim");
+		} catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("Well, this is your instructor.");
+	}
+	@Test
+	public void testFound5() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.databaseEngine.search("How is the grade of this course?");
+		} catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown).isEqualTo(true);
+		assertThat(result).isEqualTo("This is absolute good grade for good student. And I am sure you are!");
 	}
 }
