@@ -28,7 +28,7 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 			stmt.close();
 			connection.close();
 		} catch (Exception e) {
-			log.info("IOException: ", e.toString());
+			log.info("Exception: ", e.toString());
 		} finally { 
 		}
 		if (resultString != null)
