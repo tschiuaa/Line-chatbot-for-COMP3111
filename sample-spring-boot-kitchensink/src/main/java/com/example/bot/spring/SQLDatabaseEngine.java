@@ -18,7 +18,7 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 		String resultString="What???";
 		try {
 			Connection connection = getConnection();
-			PreparedStatement stmt = connection.prepareStatement("SELECT response FROM hellotable WHERE keyword like ('%', ?, '%') ");
+			PreparedStatement stmt = connection.prepareStatement("SELECT response FROM hellotable WHERE keyword like '%'||?||'%'");
 			stmt.setString(1, text);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
