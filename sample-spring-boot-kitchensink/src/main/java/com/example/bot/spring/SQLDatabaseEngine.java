@@ -24,12 +24,13 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 			while (rs.next()) {
 				resultString = rs.getString(1);
 			}
+			rs.close();
+			stmt.close();
+			connection.close();
 		} catch (IOException e) {
 			log.info("IOException: ", e.toString());
-		} finally { }
-		rs.close();
-		stmt.close();
-		connection.close();
+		} finally { 
+		}
 		if (resultString != null)
 			return resultString;
 		throw new Exception("NOT FOUND");
