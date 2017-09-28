@@ -15,25 +15,55 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 	@Override
 	String search(String text) throws Exception {
 		//Write your code here
-		String resultString="What???";
-		try {
-			Connection connection = getConnection();
-			PreparedStatement stmt = connection.prepareStatement("SELECT response FROM hellotable WHERE keyword like ('%', ?, '%') ");
-			stmt.setString(1, text);
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				resultString = rs.getString(1);
-			}
-			rs.close();
-			stmt.close();
-			connection.close();
-		} catch (IOException e) {
-			log.info("IOException: ", e.toString());
-		} finally { 
-		}
-		if (resultString != null)
-			return resultString;
-		throw new Exception("NOT FOUND");
+//		String resultString="What???";
+//		try {
+//			Connection connection = getConnection();
+//			PreparedStatement stmt = connection.prepareStatement("SELECT response FROM hellotable WHERE keyword like ('%', ?, '%') ");
+//			stmt.setString(1, text);
+//			ResultSet rs = stmt.executeQuery();
+//			while (rs.next()) {
+//				resultString = rs.getString(1);
+//			}
+//			rs.close();
+//			stmt.close();
+//			connection.close();
+//		} catch (IOException e) {
+//			log.info("IOException: ", e.toString());
+//		} finally { 
+//		}
+//		if (resultString != null)
+//			return resultString;
+//		throw new Exception("NOT FOUND");
+		   String result = "";
+	        try {
+	        
+	            Connection connection=getConnection();
+	            PreparedStatement stmt = connection.prepareStatement("SELECT keyword,response FROM hello WHERE keyword like '%'||?||'%' ");
+	            stmt.setString(1,text);
+	            ResultSet rs = stmt.executeQuery();
+	            if (rs.next()){
+	                result = rs.getString(2);
+	                System.out.println (result);
+	                //return result;
+	            }
+	            
+	            rs.close();
+	            stmt.close();
+	            connection.close();
+	            
+	            if(result != null) 
+	             {
+	                return result;
+	             }
+	            
+	            
+	        } catch (Exception e) {
+	            System.out.println(e);
+	            }
+	            
+	        
+	       return result;
+	    
 	}
 	
 	
