@@ -15,7 +15,7 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 	@Override
 	String search(String text) throws Exception {
 		//Write your code here
-		String resultString;
+		String resultString="What???";
 		try {
 			Connection connection = getConnection();
 			PreparedStatement stmt = connection.prepareStatement("SELECT response FROM hellotable WHERE keyword like ('%', ?, '%') ");
