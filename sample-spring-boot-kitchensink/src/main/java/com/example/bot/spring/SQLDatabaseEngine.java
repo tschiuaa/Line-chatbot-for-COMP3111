@@ -19,15 +19,21 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 		
 		Connection connection = getConnection();
 		PreparedStatement stmt = connection.prepareStatement("SELECT response FROM hellotable WHERE keyword="+text);
-		ResultSet rs = stmt.executeQuery();
-		while (rs.next()) {
-			resultString = rs.getString(0);
-		}
+		try {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				resultString = rs.getString(0);
+			}
+		} catch (IOException e) {
+			log.info("IOException: ", e.toString());
+		} finally { }
 		rs.close();
 		stmt.close();
 		connection.close();
 		
-		return resultString;
+		if (resultString != null)
+			return resultString;
+		throw new Exception("NOT FOUND");
 	}
 	
 	
